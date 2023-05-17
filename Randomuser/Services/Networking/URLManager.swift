@@ -13,5 +13,8 @@ class URLManager {
 
     private init() {}
 
+    private let tunnel = "https://"
+    private let server = "randomuser.me"
+
 
 }
