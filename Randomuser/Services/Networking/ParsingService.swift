@@ -23,7 +23,8 @@ class ParsingService {
             let dob = jsons[index]["dob"]["date"].stringValue
             let ege = jsons[index]["dob"]["age"].int
             let email = jsons[index]["email"].stringValue
-            let address = jsons[index]["location"]["postcode"].stringValue + ", " + jsons[index]["location"]["city"].stringValue + ", " + jsons[index]["location"]["street"]["name"].stringValue + ", " + jsons[index]["location"]["street"]["number"].stringValue
+            let location = jsons[index]["location"]
+            let address = location["postcode"].stringValue + ", " + location["city"].stringValue + ", " + location["street"]["name"].stringValue + ", " + location["street"]["number"].stringValue
             let phone = jsons[index]["phone"].stringValue
             let imageUrl = jsons[index]["picture"]["medium"].stringValue
             let imageBigUrl = jsons[index]["picture"]["large"].stringValue

@@ -78,7 +78,6 @@
 				DD061D752A137019003DFE73 /* Application */,
 				DD061D812A1375C7003DFE73 /* Model */,
 				DD061D772A137055003DFE73 /* View */,
-				DD061D982A161503003DFE73 /* Modifiers */,
 				DD061D8D2A14B334003DFE73 /* ViewModel */,
 				DD061D7B2A1374E0003DFE73 /* Services */,
 				DD061D762A137030003DFE73 /* Supporting files */,
@@ -117,6 +116,7 @@
 				DD061D692A136F69003DFE73 /* PhotoView.swift */,
 				DD061D942A151756003DFE73 /* ProfileView.swift */,
 				DD061D902A14F58B003DFE73 /* Components */,
+				DD061D982A161503003DFE73 /* Modifiers */,
 			);
 			path = View;
 			sourceTree = "<group>";
