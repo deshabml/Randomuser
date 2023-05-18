@@ -9,8 +9,10 @@ import UIKit
 
 class PhotoViewModel: ObservableObject {
 
+    @Published var users: [User] = []
     @Published var oneBigImageViewModel = BigImageViewModel(isFirst: true)
     @Published var secondBigImageViewModel = BigImageViewModel(isFirst: false)
+    @Published var isGetComleted: Bool = false
     var page: Int = 1
 
     func loadScreen() {
@@ -22,22 +24,15 @@ class PhotoViewModel: ObservableObject {
         getData()
     }
 
-    func viewProfile(isFirst: Bool) {
-        if isFirst {
-            print("first")
-        } else {
-            print("second")
-        }
-    }
-
     func getData() {
-        NetworkServiceAF.shared.getUserPhoto(page: page) { result in
+        NetworkServiceAF.shared.getUsers(page: page) { result in
             switch result {
                 case .success(let posts):
                     DispatchQueue.main.async {
-                        let userPhotos = posts
-                        self.getImage(url: userPhotos[0].url, numberImage: 1)
-                        self.getImage(url: userPhotos[1].url, numberImage: 2)
+                        self.users = posts
+                        self.getImage(url: self.users[0].imageBigUrl, numberImage: 1)
+                        self.getImage(url: self.users[1].imageBigUrl, numberImage: 2)
+                        self.isGetComleted = true
                     }
                 case .failure(let error):
                     print(error)

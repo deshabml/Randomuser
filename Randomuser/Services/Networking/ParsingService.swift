@@ -13,32 +13,38 @@ class ParsingService {
 
     private init() { }
 
-    func userPhoto(from data: Data) -> [UserPhoto]? {
+    func users(from data: Data) -> [User]? {
         guard let json = try? JSON(data: data) else { return nil }
-        var userPhotos: [UserPhoto] = []
+        var users: [User] = []
         let jsons = json["results"]
         for index in 0 ..< jsons.count {
-            let name = jsons[index]["name"]["first"].stringValue
-            let url = jsons[index]["picture"]["large"].stringValue
-            print(name)
-            print(url)
-            let userPhoto = UserPhoto(url: url)
-            userPhotos.append(userPhoto)
+            let firstName = jsons[index]["name"]["first"].stringValue
+            let lastName = jsons[index]["name"]["last"].stringValue
+            let dob = jsons[index]["dob"]["date"].stringValue
+            let ege = jsons[index]["dob"]["age"].int
+            let email = jsons[index]["email"].stringValue
+            let address = jsons[index]["location"]["postcode"].stringValue + ", " + jsons[index]["location"]["city"].stringValue + ", " + jsons[index]["location"]["street"]["name"].stringValue + ", " + jsons[index]["location"]["street"]["number"].stringValue
+            let phone = jsons[index]["phone"].stringValue
+            let imageUrl = jsons[index]["picture"]["medium"].stringValue
+            let imageBigUrl = jsons[index]["picture"]["large"].stringValue
+            let userPhoto = User(firstName: firstName,
+                                 lastName: lastName,
+                                 dob: dob,
+                                 age: ege ?? 0,
+                                 email: email,
+                                 address: address,
+                                 phone: phone,
+                                 imageUrl: imageUrl,
+                                 imageBigUrl: imageBigUrl)
+            users.append(userPhoto)
         }
-        let url = json["name"]["first"].stringValue
-        print("---------------")
-        print(url)
-        print("---------------")
-        print(json["results"][0]["picture"]["large"])
-        print("---------------")
-
-
-
-//        }
-//        let url = json["results"]["picture"]["large"].stringValue
-//        let userPhoto = UserPhoto(url: url)
-        return userPhotos
+        print(json)
+//        print("---------------")
+        print(users)
+//        print("---------------")
+        return users
     }
+
 
 }
 

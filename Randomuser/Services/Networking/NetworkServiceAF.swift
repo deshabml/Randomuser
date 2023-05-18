@@ -22,7 +22,7 @@ class NetworkServiceAF {
 
     private init() {}
 
-    func getUserPhoto(page: Int, completion: @escaping (Result<[UserPhoto], Error>)->()) {
+    func getUsers(page: Int, completion: @escaping (Result<[User], Error>)->()) {
         AF.request("https://randomuser.me/api/?page=" + "\(page)" + "&results=2&seed=abc").response { response in
             guard let data = response.data else {
                 if let error = response.error {
@@ -30,8 +30,8 @@ class NetworkServiceAF {
                 }
                 return
             }
-            guard let userPhoto = ParsingService.shared.userPhoto(from: data) else { return }
-            completion(.success(userPhoto))
+            guard let users = ParsingService.shared.users(from: data) else { return }
+            completion(.success(users))
         }
     }
 
@@ -48,14 +48,5 @@ class NetworkServiceAF {
             completion(.success(image))
         }
     }
-
-//    func downloadImageAA(url: String) async throws -> UIImage {
-//        guard let url = URL(string: url) else { throw NetworkError.badUrl }
-//        let response = try await URLSession.shared.data(from: url)
-//        let data = response.0
-//        print(data)
-//        guard let image = UIImage(data: data) else { throw NetworkError.invalidImageData }
-//        return image
-//    }
 
 }

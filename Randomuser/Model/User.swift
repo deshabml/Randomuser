@@ -17,5 +17,6 @@ struct User {
     var address: String
     var phone: String
     var imageUrl: String
+    var imageBigUrl: String
 
 }

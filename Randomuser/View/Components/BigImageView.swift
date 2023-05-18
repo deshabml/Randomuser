@@ -18,28 +18,30 @@ struct BigImageView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(16)
-            VStack {
-                HStack {
+            if mainViewModel.isGetComleted {
+                VStack {
+                    HStack {
+                        Spacer()
+                        NavigationLink {
+                            ProfileView(viewModel: ProfileViewModel(user: mainViewModel.users[viewModel.isFirst ? 0 : 1]))
+                        } label: {
+                            Image("PrifileIcon")
+                                .resizable()
+                                .frame(width: 55, height: 70)
+                                .foregroundColor(Color("MainThemeColor"))
+                                .padding(10)
+                        }
+                    }
                     Spacer()
                     Button {
-                        mainViewModel.viewProfile(isFirst: viewModel.isFirst)
+                        mainViewModel.nextPage()
                     } label: {
-                        Image("PrifileIcon")
+                        Image(systemName: "star.circle.fill")
                             .resizable()
-                            .frame(width: 55, height: 70)
+                            .frame(width: 70, height: 70)
                             .foregroundColor(Color("MainThemeColor"))
                             .padding(10)
                     }
-                }
-                Spacer()
-                Button {
-                    mainViewModel.nextPage()
-                } label: {
-                    Image(systemName: "star.circle.fill")
-                        .resizable()
-                        .frame(width: 70, height: 70)
-                        .foregroundColor(Color("MainThemeColor"))
-                        .padding(10)
                 }
             }
         }
