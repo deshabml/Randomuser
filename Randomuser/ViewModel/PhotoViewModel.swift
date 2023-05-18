@@ -12,7 +12,9 @@ class PhotoViewModel: ObservableObject {
     @Published var users: [User] = []
     @Published var oneBigImageViewModel = BigImageViewModel(isFirst: true)
     @Published var secondBigImageViewModel = BigImageViewModel(isFirst: false)
-    @Published var isGetComleted: Bool = false
+    @Published var isGetComleted = false
+    @Published var showErrorAlert = false
+    @Published var textErrorAlert = ""
     var page: Int = 1
 
     func loadScreen() {
@@ -35,7 +37,8 @@ class PhotoViewModel: ObservableObject {
                         self.isGetComleted = true
                     }
                 case .failure(let error):
-                    print(error)
+                    self.textErrorAlert = error.localizedDescription
+                    self.showErrorAlert.toggle()
             }
         }
     }
@@ -53,7 +56,8 @@ class PhotoViewModel: ObservableObject {
                         }
                     }
                 case .failure(let error):
-                    print(error)
+                    self.textErrorAlert = error.localizedDescription
+                    self.showErrorAlert.toggle()
             }
         }
     }

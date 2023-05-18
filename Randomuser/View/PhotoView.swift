@@ -19,6 +19,8 @@ struct PhotoView: View {
                 .environmentObject(viewModel)
         }
         .padding()
+        .modifier(AlertElement(text: viewModel.textErrorAlert,
+                               switchAlert: $viewModel.showErrorAlert))
         .onAppear {
             viewModel.loadScreen()
         }

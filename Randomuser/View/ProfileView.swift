@@ -67,32 +67,11 @@ struct ProfileView: View {
             Spacer()
         }
         .padding()
-        .confirmationDialog("Вызов", isPresented: $viewModel.showPhoneCall, actions: {
-            Text(viewModel.user.phone)
-                .font(.custom("AvenirNext-Bold",
-                              size: 20))
-                .foregroundColor(.black)
-            Button {
-                viewModel.phoneCallAction()
-            } label: {
-                Text("Вызов")
-                    .font(.custom("AvenirNext-Bold",
-                                  size: 20))
-                    .foregroundColor(.black)
-            }
-            Button(role: .cancel) { } label: {
-                Text("Отмена")
-                    .font(.custom("AvenirNext-Bold",
-                                  size: 20))
-                    .foregroundColor(.black)
-            }
-            .border(Color.black, width: 2)
-        }, message: {
-            Text(viewModel.user.phone)
-                .font(.custom("AvenirNext-Bold",
-                              size: 20))
-                .foregroundColor(.blue)
-        })
+        .modifier(ConfirmationDialogElement(showPhoneCall: $viewModel.showPhoneCall,
+                                            phone: viewModel.user.phone,
+                                            completion: {
+            viewModel.phoneCallAction()
+        }))
         .foregroundColor(.black)
         .onAppear {
             viewModel.loadScreen()

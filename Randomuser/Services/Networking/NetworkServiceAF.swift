@@ -8,14 +8,6 @@
 import UIKit
 import Alamofire
 
-enum NetworkError: Error {
-    case badUrl
-    case badResponse
-    case invalidDecoding
-    case invalidEncoding
-    case invalidImageData
-}
-
 class NetworkServiceAF {
 
     static let shared = NetworkServiceAF()
@@ -43,7 +35,6 @@ class NetworkServiceAF {
                 }
                 return
             }
-            print(data)
             guard let image = UIImage(data: data) else { return }
             completion(.success(image))
         }
