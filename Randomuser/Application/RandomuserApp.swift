@@ -11,7 +11,9 @@ import SwiftUI
 struct RandomuserApp: App {
     var body: some Scene {
         WindowGroup {
-            PhotoView()
+            NavigationView {
+                PhotoView()
+            }
         }
     }
 }
