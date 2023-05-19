@@ -8,15 +8,24 @@
 import SwiftUI
 
 struct PhotoView: View {
+
+    @StateObject var viewModel = PhotoViewModel()
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            BigImageView(viewModel: viewModel.oneBigImageViewModel)
+                .environmentObject(viewModel)
+            BigImageView(viewModel: viewModel.secondBigImageViewModel)
+                .environmentObject(viewModel)
         }
         .padding()
+        .modifier(AlertElement(text: viewModel.textErrorAlert,
+                               switchAlert: $viewModel.showErrorAlert))
+        .onAppear {
+            viewModel.loadScreen()
+        }
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
